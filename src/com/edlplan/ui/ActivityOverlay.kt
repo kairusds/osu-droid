@@ -48,7 +48,6 @@ object ActivityOverlay {
             if (fragment.isAdded()) {
                 return
             }
-            
             if (displayingOverlay.contains(fragment) || fragmentManager!!.findFragmentByTag(tag) != null) {
                 displayingOverlay.remove(fragment)
                 fragmentManager!!.beginTransaction()
