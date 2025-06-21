@@ -264,7 +264,6 @@ class SettingsFragment : SettingsFragment() {
             val success = ConfigBackup.exportPreferences()
             if(success) {
                 ToastLogger.showText(com.osudroid.resources.R.string.config_backup_info_success, true)
-                dismiss()
             }else{
                 ToastLogger.showText(com.osudroid.resources.R.string.config_backup_info_fail, true)
             }
