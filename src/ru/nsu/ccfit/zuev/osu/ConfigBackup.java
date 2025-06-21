@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,7 +73,9 @@ public class ConfigBackup {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = prefs.edit();
 
-            for(String key : json.keys()) {
+            Iterator<String> keys = json.keys();
+            while(keys.hasNext()) {
+                String key = keys.next();
                 if(EXCLUDE_KEYS.contains(key)) continue;
                 Object value = json.get(key);
             
