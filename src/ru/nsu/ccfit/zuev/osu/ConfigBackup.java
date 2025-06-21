@@ -20,7 +20,7 @@ public class ConfigBackup {
 
     public static boolean exportPreferences() {
         try {
-            Context context = GlobalManager.getInstance().getMainActivity().getContext();
+            Context context = GlobalManager.getInstance().getMainActivity();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             
             JSONObject json = new JSONObject();
@@ -66,11 +66,11 @@ public class ConfigBackup {
             
             String jsonString = jsonBuilder.toString();
             JSONObject json = new JSONObject(jsonString);
-            Context context = GlobalManager.getInstance().getMainActivity().getContext();
+            Context context = GlobalManager.getInstance().getMainActivity();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = prefs.edit();
 
-            for(String key : json.keySet()) {
+            for(String key : json.keys()) {
                 if(EXCLUDE_KEYS.contains(key)) continue;
                 Object value = json.get(key);
             
