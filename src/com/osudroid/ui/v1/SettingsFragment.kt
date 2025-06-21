@@ -263,10 +263,10 @@ class SettingsFragment : SettingsFragment() {
         findPreference<Preference>("backup")!!.setOnPreferenceClickListener {
             val success = ConfigBackup.exportPreferences()
             if(success) {
-                ToastLogger.showText(R.string.config_backup_info_success, true)
+                ToastLogger.showText(com.osudroid.resources.R.string.config_backup_info_success, true)
                 dismiss()
             }else{
-                ToastLogger.showText(R.string.config_backup_info_fail, true)
+                ToastLogger.showText(com.osudroid.resources.R.string.config_backup_info_fail, true)
             }
             true
         }
@@ -274,10 +274,10 @@ class SettingsFragment : SettingsFragment() {
         findPreference<Preference>("restore")!!.setOnPreferenceClickListener {
             val success = ConfigBackup.importPreferences()
             if(success) {
-                ToastLogger.showText(R.string.config_backup_restore_info_success, true)
+                ToastLogger.showText(com.osudroid.resources.R.string.config_backup_restore_info_success, true)
                 dismiss()
             }else{
-                ToastLogger.showText(R.string.config_backup_restore_info_fail, true)
+                ToastLogger.showText(com.osudroid.resources.R.string.config_backup_restore_info_fail, true)
             }
             true
         }
