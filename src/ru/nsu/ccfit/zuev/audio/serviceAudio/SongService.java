@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -34,9 +35,14 @@ public class SongService extends Service {
 
         // Ensure there are no brief delays on audio operations (causing stream stalls etc.) after periods of silence.
         BASS.BASS_SetConfig(BASS.BASS_CONFIG_DEV_NONSTOP, 1);
-        // Audio Session ID, useful for audio effects apps like Wavelet in Android 12+
+        // Audio Session ID and AudioEffect intent, useful for audio effect apps like Wavelet in Android 12+
         int audioSessionId = ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE)).generateAudioSessionId();
         BASS.BASS_SetConfig(BASS.BASS_CONFIG_ANDROID_SESSIONID, audioSessionId);
+        final Intent intent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
+        intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId);
+        intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.getPackageName());
+        intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_GAME);
+        context.sendBroadcast(intent);
 
         BASS.BASS_Init(-1, defaultFrequency, BASS.BASS_DEVICE_LATENCY);
 
