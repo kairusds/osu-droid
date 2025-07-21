@@ -585,6 +585,7 @@ public class MainActivity extends BaseGameActivity implements
                     saveServiceObject = (SaveServiceObject) getApplication();
                     saveServiceObject.setSongService(songService);
                     GlobalManager.getInstance().setSongService(songService);
+                    SongService.initBASS(MainActivity.this);
                 }
 
                 @Override

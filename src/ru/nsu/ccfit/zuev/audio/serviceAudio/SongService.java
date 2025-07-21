@@ -2,6 +2,8 @@ package ru.nsu.ccfit.zuev.audio.serviceAudio;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -13,7 +15,6 @@ import com.un4seen.bass.BASS;
 import ru.nsu.ccfit.zuev.audio.Status;
 import ru.nsu.ccfit.zuev.osu.MainActivity;
 
-
 public class SongService extends Service {
     public static int defaultFrequency = 44100;
 
@@ -21,7 +22,7 @@ public class SongService extends Service {
     private boolean isGaming = false;
     // private boolean isSettingMenu = false;
 
-    public static void initBASS() {
+    public static void initBASS(Context context) {
         // This likely doesn't help, but also doesn't seem to cause any issues or any CPU increase.
         BASS.BASS_SetConfig(BASS.BASS_CONFIG_UPDATEPERIOD, 5);
 
@@ -31,6 +32,9 @@ public class SongService extends Service {
 
         // Ensure there are no brief delays on audio operations (causing stream stalls etc.) after periods of silence.
         BASS.BASS_SetConfig(BASS.BASS_CONFIG_DEV_NONSTOP, 1);
+        // Audio Session ID, useful for audio effects apps like Wavelet in Android 12+
+        int audioSessionId = ((AudioManager) context.getSystemService(Context.AUDIO_SERVICE)).generateAudioSessionId();
+        BASS.BASS_SetConfig(BASS.BASS_CONFIG_ANDROID_SESSIONID, audioSessionId);
 
         BASS.BASS_Init(-1, defaultFrequency, BASS.BASS_DEVICE_LATENCY);
 
