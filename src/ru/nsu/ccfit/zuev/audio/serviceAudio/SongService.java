@@ -8,6 +8,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import org.anddev.andengine.util.Debug;
+
 import java.io.File;
 
 import com.un4seen.bass.BASS;
@@ -44,6 +46,8 @@ public class SongService extends Service {
         Log.i("BASS-Config", "Device buffer length:   " + BASS.BASS_GetConfig(BASS.BASS_CONFIG_DEV_BUFFER));
         Log.i("BASS-Config", "Playback buffer length: " + BASS.BASS_GetConfig(BASS.BASS_CONFIG_BUFFER));
         Log.i("BASS-Config", "Device nonstop:         " + BASS.BASS_GetConfig(BASS.BASS_CONFIG_DEV_NONSTOP));
+        Debug.i("Audio Session ID: " + BASS.BASS_GetConfig(BASS.BASS_CONFIG_ANDROID_SESSIONID));
+        Debug.i("AAudio Enabled: " + BASS.BASS_GetConfig(BASS.BASS_CONFIG_ANDROID_AAUDIO));
     }
 
     @Override
